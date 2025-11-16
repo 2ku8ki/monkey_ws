@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /workspace/monkey_ws/limo_ws/install/setup.sh

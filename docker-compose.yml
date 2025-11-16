@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  lkas_app:
+    image: l4t-ros-melodic:latest     # 아래 Dockerfile로 빌드할 이미지 이름
+    container_name: lkas_ros_container
+
+    # Jetson GPU 활성화 옵션 (필수!)
+    runtime: nvidia
+
+    # 네트워크 (ROS 통신)
+    network_mode: host
+
+    # X11 GUI (imshow 필요하면)
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /home/tjdusdl/monkey_ws:/workspace/monkey_ws:rw
+
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - ROS_DISTRO=melodic
+      - DEBIAN_FRONTEND=noninteractive
+
+    working_dir: /workspace/monkey_ws
+    command: bash
+
